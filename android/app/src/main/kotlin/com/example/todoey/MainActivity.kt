@@ -1,4 +1,4 @@
-package com.example.todoey
+package com.actionablecoaching.todoey
 
 import io.flutter.embedding.android.FlutterActivity
 
