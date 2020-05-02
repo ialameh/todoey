@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:todoey/task_list.dart';
 
 import 'add_task_screen.dart';
-import 'task_list.dart';
+//import 'task_list.dart';
 import 'todoey_brain.dart';
-//import 'list_line.dart';
+import 'package:provider/provider.dart';
 
-class TaskScreen extends StatefulWidget {
-  @override
-  _TaskScreenState createState() => _TaskScreenState();
-}
+class TaskScreen extends StatelessWidget {
+@override
 
-class _TaskScreenState extends State<TaskScreen> {
-  String checkResponse = '';
-  bool currentCheckStatus = false;
-  TodoeyBrain brain = new TodoeyBrain();
-  String tempTask;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,11 +23,7 @@ class _TaskScreenState extends State<TaskScreen> {
               child: Container(
                 padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: AddTaskScreen(addTheTask: (String taskData) {
-                  setState(() {
-                    brain.addTask(taskData);
-                  });
-                }),
+                child: AddTaskScreen(),
               ),
             ),
           );
@@ -71,7 +61,7 @@ class _TaskScreenState extends State<TaskScreen> {
                         color: Colors.white,
                       ),
                     ),
-                    Text(checkResponse,
+                    Text('${Provider.of<TodoeyBrain>(context).tasks.length} Tasks',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 18.0,
@@ -87,7 +77,7 @@ class _TaskScreenState extends State<TaskScreen> {
                   topRight: Radius.circular(20.0),
                 ),
               ),
-              child: TaskList(brain),
+           child: TaskList(),
             ),
           ),
         ],

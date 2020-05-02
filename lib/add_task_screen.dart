@@ -1,17 +1,14 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey/todoey_brain.dart';
 
 class AddTaskScreen extends StatelessWidget {
-  final Function addTheTask;
-  final Function setTaskString;
-  final TextEditingController _controller = new TextEditingController();
-
-  String taskData;
-
-  AddTaskScreen({this.addTheTask, this.setTaskString});
-  @override
+  
+    @override
   Widget build(BuildContext context) {
+  String taskText;
     return Container(
       color: Color(0xFF757575),
       child: Container(
@@ -33,17 +30,16 @@ class AddTaskScreen extends StatelessWidget {
             decoration: InputDecoration(
               hintText: 'Input Task Here',
             ),
-            controller: _controller,
             onChanged: (value) {
-              taskData = value;
+              taskText = value;
             },
           ),
           FlatButton(
             color: Colors.lightBlueAccent,
             child: Text('Add', style: TextStyle(fontSize: 18.0)),
-            onPressed: () async {
-              await addTheTask(taskData);
-              _controller.clear();
+            onPressed: ()   {
+              Provider.of<TodoeyBrain>(context, listen: false).addTask(taskText);
+
               Navigator.pop(context);
             },
           ),
